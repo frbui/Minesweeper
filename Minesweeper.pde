@@ -1,6 +1,6 @@
 import de.bezier.guido.*;
-private int NUM_ROWS = 25;
-private int NUM_COLS = 25;
+private int NUM_ROWS = 20;
+private int NUM_COLS = 20;
 private int NUN_BOMBS = 40;
 private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> bombs; //ArrayList of just the minesweeper buttons that are mined
@@ -11,12 +11,9 @@ void setup ()
 {
     size(400, 400);
     textAlign(CENTER,CENTER);
-    
-    // make the manager
     Interactive.make( this );
-    
-    //your code to declare and initialize buttons goes here
     buttons = new MSButton[NUM_ROWS][NUM_COLS];
+        bombs = new ArrayList <MSButton>();
     for(int a = 0; a < NUM_ROWS; a++)
     {
         for(int b = 0; b < NUM_COLS; b++)
@@ -24,12 +21,12 @@ void setup ()
         buttons[a][b] = new MSButton(a,b);
         }
     }
-    bombs = new ArrayList <MSButton>();
+
     setBombs();
 }
 public void setBombs()
 {
-    for(int e = 0; e < 25; e++)
+    for(int e = 0; e < 40; e++)
     {
         int ok = (int)(Math.random()*NUM_ROWS);
         int ko = (int)(Math.random()*NUM_COLS);
@@ -162,41 +159,46 @@ public class MSButton
     }
     public boolean isValid(int r, int c)
     {
-        return (r >= 0 && c < NUM_ROWS) && (c >= 0 && c<NUM_COLS)
+        if(r < NUM_ROWS && c < NUM_COLS && r >= 0 && c >= 0)
+        {
+            return true;
+        }
+        
+            return false;
         
     }
     public int countBombs(int row, int col)
     {
         int numBombs = 0;
-            if(bombs.contains(buttons[row-1][col-1])) 
+            if(isValid(row -1,col -1) && bombs.contains(buttons[row-1][col-1])) 
             {
                 numBombs = numBombs + 1;
             }
-            if(bombs.contains(buttons[row][col-1])) 
+            if(isValid(row,col -1) && bombs.contains(buttons[row][col-1])) 
             {
                 numBombs = numBombs + 1;
             }
-            if(bombs.contains(buttons[row+1][col-1])) 
+            if(isValid(row +1,col -1) && bombs.contains(buttons[row+1][col-1])) 
             {
                 numBombs = numBombs + 1;
             }
-            if(bombs.contains(buttons[row-1][col])) 
+            if(isValid(row -1,col) && bombs.contains(buttons[row-1][col])) 
             {
                 numBombs = numBombs + 1;
             }
-            if(bombs.contains(buttons[row+1][col])) 
+            if(isValid(row +1,col ) && bombs.contains(buttons[row+1][col])) 
             {
                 numBombs = numBombs + 1;
             }
-            if(bombs.contains(buttons[row-1][col+1])) 
+            if(isValid(row -1,col +1) && bombs.contains(buttons[row-1][col+1])) 
             {
                 numBombs = numBombs + 1;
             }
-            if(bombs.contains(buttons[row][col+1]))
+            if(isValid(row,col +1) && bombs.contains(buttons[row][col+1]))
             {
                 numBombs = numBombs + 1;
             }
-            if(bombs.contains(buttons[row+1][col+1])) 
+            if(isValid(row +1,col +1) && bombs.contains(buttons[row+1][col+1])) 
             {
                 numBombs = numBombs + 1;
             }
