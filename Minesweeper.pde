@@ -26,7 +26,7 @@ void setup ()
 }
 public void setBombs()
 {
-    for(int e = 0; e < 40; e++)
+    for(int e = 0; e < NUN_BOMBS; e++)
     {
         int ok = (int)(Math.random()*NUM_ROWS);
         int ko = (int)(Math.random()*NUM_COLS);
@@ -41,20 +41,44 @@ public void draw ()
 {
     background( 0 );
     if(isWon())
+    {
         displayWinningMessage();
+    }
 }
 public boolean isWon()
 {
-    //your code here
-    return false;
+    for (int r = 0; r < NUM_ROWS; r++)
+    {
+      for (int c = 0; c < NUM_COLS; c++)
+      {
+          if(!bombs.contains(buttons[r][c]) && !buttons[r][c].isClicked())
+          { 
+          return false;
+          }
+      }
+  }
+  return true;
 }
 public void displayLosingMessage()
 {
-    //your code here
+    String losemessage = "f5 is your friend";
+    for(int u = 1; u < losemessage.length()+6; u ++)
+    {
+        buttons[10][u].setLabel(losemessage.substring(u-1, u));
+    }
+      for (MSButton bomb : bombs)
+    {
+        bomb.isClicked();
+    }
+    
 }
 public void displayWinningMessage()
 {
-    //your code here
+    String winmessage = "Nice...";
+    for(int u = 5; u < winmessage.length()+5; u ++)
+    {
+        buttons[10][u].setLabel(winmessage.substring(u-5, u-4));
+    }
 }
 
 public class MSButton
