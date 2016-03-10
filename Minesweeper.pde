@@ -6,7 +6,7 @@ private MSButton[][] buttons; //2d array of minesweeper buttons
 private ArrayList <MSButton> bombs; //ArrayList of just the minesweeper buttons that are mined
 public int ok;
 public int ko;
-
+public boolean mehh;
 void setup ()
 {
     size(400, 400);
@@ -21,7 +21,9 @@ void setup ()
         buttons[a][b] = new MSButton(a,b);
         }
     }
+
     setBombs();
+    mehh = false;
 }
 public void setBombs()
 {
@@ -65,12 +67,14 @@ public void displayLosingMessage()
     {
         buttons[10][u].setLabel(losemessage.substring(u-1, u));
     }
-    for (int q =0; q < bombs.size (); q++)
+    for(int i = 0; i < bombs.size(); i++)
     {
-        bombs.get(q).marked = false;
-        bombs.get(q).clicked = true;
+        (bombs.get(i)).setClicked(true);
+        (bombs.get(i)).setMarked(false);
+       
     }
-    
+  
+
 }
 public void displayWinningMessage()
 {
@@ -80,6 +84,7 @@ public void displayWinningMessage()
         buttons[10][u].setLabel(winmessage.substring(u-5, u-4));
     }
 }
+
 public class MSButton
 {
     private int r, c;
@@ -103,16 +108,26 @@ public class MSButton
     {
         return marked;
     }
+    public void setMarked(boolean nMark)
+    {
+        marked = nMark;
+    }
     public boolean isClicked()
     {
         return clicked;
     }
+    public void setClicked(boolean nClick)
+    {
+        clicked = nClick;
+    }
+    
     public void mousePressed () 
     {
         clicked = true;
         if(keyPressed == true)
         {
             marked = !marked;
+            clicked = false;
         }
         else if(bombs.contains(this))
         {
@@ -158,6 +173,7 @@ public class MSButton
             }
         }
     }
+
     public void draw () 
     {    
         if (marked)
@@ -168,6 +184,7 @@ public class MSButton
             fill( 200 );
         else 
             fill( 100 );
+
         rect(x, y, width, height);
         fill(0);
         text(label,x+width/2,y+height/2);
@@ -182,7 +199,9 @@ public class MSButton
         {
             return true;
         }
+        
             return false;
+        
     }
     public int countBombs(int row, int col)
     {
@@ -222,3 +241,6 @@ public class MSButton
         return numBombs;
     }
 }
+
+
+
