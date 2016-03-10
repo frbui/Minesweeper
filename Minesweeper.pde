@@ -66,9 +66,9 @@ public void displayLosingMessage()
     {
         buttons[10][u].setLabel(losemessage.substring(u-1, u));
     }
-      for (MSButton bomb : bombs)
+    for (MSButton bomb : bombs)
     {
-        bomb.isClicked();
+        bomb.setClicked(true);
     }
     
 }
@@ -190,6 +190,10 @@ public class MSButton
         
             return false;
         
+    }
+    public void setClicked(boolean c)
+    {
+        clicked = c;
     }
     public int countBombs(int row, int col)
     {
