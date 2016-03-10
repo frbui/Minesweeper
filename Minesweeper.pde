@@ -66,10 +66,10 @@ public void displayLosingMessage()
     {
         buttons[10][u].setLabel(losemessage.substring(u-1, u));
     }
-    for (int i =0; i < bombs.size (); i++)
+    for (int q =0; q < bombs.size (); q++)
     {
-        bombs.get(i).marked = false;
-        bombs.get(i).clicked = true;
+        bombs.get(q).marked = false;
+        bombs.get(q).clicked = true;
     }
     
 }
