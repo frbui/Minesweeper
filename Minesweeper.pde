@@ -63,25 +63,28 @@ public boolean isWon()
 public void displayLosingMessage()
 {
     String losemessage = "f5 is your friend";
-    for(int u = 1; u < losemessage.length()+6; u ++)
+    for(int u = 1; u < losemessage.length(); u ++)
     {
         buttons[10][u].setLabel(losemessage.substring(u-1, u));
+
     }
-    for(int i = 0; i < bombs.size(); i++)
+
+    for(int p = 0; p < NUM_ROWS; p++)
     {
-        (bombs.get(i)).setClicked(true);
-        (bombs.get(i)).setMarked(false);
-       
+        for(int l = 0; l < NUM_COLS; l++)
+        {
+                buttons[p][l].clicked = true;
+            
+        }
     }
-  
 
 }
 public void displayWinningMessage()
 {
     String winmessage = "Nice...";
-    for(int u = 5; u < winmessage.length()+5; u ++)
+    for(int u = 1; u < winmessage.length(); u ++)
     {
-        buttons[10][u].setLabel(winmessage.substring(u-5, u-4));
+        buttons[1][u].setLabel(winmessage.substring(u-1, u));
     }
 }
 
@@ -108,26 +111,18 @@ public class MSButton
     {
         return marked;
     }
-    public void setMarked(boolean nMark)
-    {
-        marked = nMark;
-    }
+  
     public boolean isClicked()
     {
         return clicked;
     }
-    public void setClicked(boolean nClick)
-    {
-        clicked = nClick;
-    }
-    
+ 
     public void mousePressed () 
     {
         clicked = true;
         if(keyPressed == true)
         {
             marked = !marked;
-            clicked = false;
         }
         else if(bombs.contains(this))
         {
